@@ -331,9 +331,7 @@ body{overflow:auto;}
     <button class="btn" onclick="startExperience()">Tap to Open✨</button>
 </div>
 
-<audio id="bgMusic" preload="auto">
-  <source src="bgmusic.mp3" type="audio/mp3">
-</audio>
+<audio id="bgMusic" src="bgmusic.mp3" preload="auto" loop></audio>
 
 <script>
 // ===== EARLY AUDIO BUFFER =====
@@ -383,24 +381,18 @@ Happy birthday, my girl. 🎂🫶 Love you, Janu ❤️... oor acha bane ka try 
 
 <script>
 function startExperience(){
-    const start=document.getElementById("startScreen");
-    start.style.opacity=0; start.style.transform='scale(1.08)';
-    setTimeout(()=>start.style.display="none",450);
-    document.getElementById("mainContent").classList.add("show");
-    const music=document.getElementById("bgMusic");
-    music.volume=0;
-    setTimeout(()=>music.play().catch(()=>{}),500);
 
-    // smooth cinematic fade-in
-    let v=0;
-    const fade=setInterval(()=>{
-        v+=0.05;
-        if(v>=0.65){
-            v=0.65;
-            clearInterval(fade);
-        }
-        music.volume=v;
-    },120);
+    const music=document.getElementById("bgMusic");
+    music.volume=0.65;
+    music.play().catch(err=>console.log("Audio failed:",err));
+
+    const start=document.getElementById("startScreen");
+    start.style.opacity=0;
+    start.style.transform='scale(1.08)';
+
+    setTimeout(()=>{start.style.display="none";},450);
+
+    document.getElementById("mainContent").classList.add("show");
 }
 
 /* slideshow */
